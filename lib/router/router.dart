@@ -29,12 +29,28 @@ class AppRouter {
           );
         },
       ),
+      GoRoute(
+        path: '/add-transaction',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return const MaterialPage(
+            child: AddTransaction(),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/transaction-details/:id',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return const MaterialPage(
+            child: TransactionDetails(),
+          );
+        },
+      ),
     ],
     redirect: (context, state) {
       if (!AuthService.isLoggedIn()) {
         return '/auth';
       }
-      return '/';
+      return state.path;
     },
   );
 }
