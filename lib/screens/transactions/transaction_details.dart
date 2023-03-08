@@ -16,8 +16,19 @@ class TransactionDetails extends StatelessWidget {
           },
         ),
       ),
-      body: const Center(
-        child: Text('Transaction Details Page'),
+      body: Container(
+        child: Row(
+          children: const [
+            Center(
+              child: Text(
+                '20 USD',
+                style: TextStyle(
+                  fontSize: 26,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
+
 import '../widgets/widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -38,14 +40,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Future<void> signUpHandler(context) async {
-    final user = (await _auth.createUserWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    ))
-        .user;
-    //TODO: ADD user info into local state manager
+    try {
+      final User? user = (await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      ))
+          .user;
 
-    Navigator.of(context).pushReplacementNamed('/');
+      if (user != null) {
+        GoRouter.of(context).push('/');
+      }
+    } catch (e) {
+      print('Error with message: $e.message');
+    }
   }
 
   @override

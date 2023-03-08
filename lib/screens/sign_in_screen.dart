@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/widgets.dart';
 
@@ -39,14 +40,19 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future signInHandler(context) async {
-    final User? user = (await _auth.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    ))
-        .user;
+    try {
+      final User? user = (await _auth.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      ))
+          .user;
 
-    // TODO: add user info into state manager
-    Navigator.of(context).pushReplacementNamed('/');
+      if (user != null) {
+        GoRouter.of(context).push('/');
+      }
+    } catch (e) {
+      print('Error with message: $e.message');
+    }
   }
 
   @override
