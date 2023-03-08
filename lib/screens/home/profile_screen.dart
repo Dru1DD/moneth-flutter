@@ -71,11 +71,9 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 500,
             ),
-            Expanded(
-              child: BuildButton(
-                buttonText: 'Log out',
-                pressedCallback: logOutHandler,
-              ),
+            BuildButton(
+              buttonText: 'Log out',
+              pressedCallback: logOutHandler,
             ),
           ],
         ),

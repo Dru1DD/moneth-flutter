@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import '../widgets/widgets.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -20,6 +21,8 @@ class _SignInScreenState extends State<SignInScreen> {
   late TextEditingController _passwordController;
   late bool isHidePassword;
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -35,11 +38,15 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  Future signInHandler() async {
-    FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future signInHandler(context) async {
+    final User? user = (await _auth.signInWithEmailAndPassword(
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
-    );
+    ))
+        .user;
+
+    // TODO: add user info into state manager
+    Navigator.of(context).pushReplacementNamed('/');
   }
 
   @override
@@ -98,7 +105,7 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(height: 18),
               BuildButton(
                 buttonText: 'Sign in',
-                pressedCallback: signInHandler,
+                pressedCallback: () => signInHandler(context),
               ),
               const SizedBox(height: 18),
               RichText(

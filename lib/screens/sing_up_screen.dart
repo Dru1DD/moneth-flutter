@@ -20,6 +20,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController _passwordController;
   late bool isHidePassword;
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -35,11 +37,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  Future signUpHandler() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  Future<void> signUpHandler(context) async {
+    final user = (await _auth.createUserWithEmailAndPassword(
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
-    );
+    ))
+        .user;
+    //TODO: ADD user info into local state manager
+
+    Navigator.of(context).pushReplacementNamed('/');
   }
 
   @override
@@ -96,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 18),
               BuildButton(
                 buttonText: 'Sign Up',
-                pressedCallback: signUpHandler,
+                pressedCallback: () => signUpHandler(context),
               ),
               const SizedBox(height: 18),
               RichText(

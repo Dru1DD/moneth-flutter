@@ -6,3 +6,6 @@ export 'auth_page.dart';
 export 'home/main_screen.dart';
 export 'home/analytics_screen.dart';
 export 'home/profile_screen.dart';
+
+export 'transactions/add_transaction.dart';
+export 'transactions/transaction_details.dart';

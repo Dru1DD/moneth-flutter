@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         color: Colors.black,
         buttonBackgroundColor: Colors.redAccent,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 400),
         onTap: (index) {
