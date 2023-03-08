@@ -2,44 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
 
-const transactionExample = [
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-];
+import '../../example/transaction_list.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -118,8 +81,16 @@ class _MainScreenState extends State<MainScreen> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InkWell(
-                      onTap: () => GoRouter.of(context)
-                          .push('/transaction-details/$index'),
+                      onTap: () {
+                        context.push(
+                          '/transaction-details/$index',
+                          extra: {
+                            'id': index.toString(),
+                          },
+                        );
+// () => GoRouter.of(context)
+//                           .push('/transaction-details/$index'),
+                      },
                       child: TransactionItem(
                         incomeType: transactionList[index]['incomeType'],
                         cardType: transactionList[index]['cardType'],
