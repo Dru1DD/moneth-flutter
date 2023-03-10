@@ -35,21 +35,25 @@ class TransactionDetails extends StatelessWidget {
                 ),
               ),
             ),
-            const Field(
+            Field(
               firstLabel: 'Account',
-              secondLabel: 'Debet card',
+              secondLabel:
+                  transactionList[transactionId]['cardType'].toString(),
             ),
-            const Field(
+            Field(
               firstLabel: 'Catagory',
-              secondLabel: 'Shops',
+              secondLabel:
+                  transactionList[transactionId]['catagory'].toString(),
             ),
-            const Field(
+            Field(
               firstLabel: 'Transaction time',
-              secondLabel: '17:09',
+              secondLabel:
+                  transactionList[transactionId]['transactionTime'].toString(),
             ),
-            const Field(
+            Field(
               firstLabel: 'Currency',
-              secondLabel: 'USD',
+              secondLabel:
+                  transactionList[transactionId]['currency'].toString(),
             ),
           ],
         ),
