@@ -1,45 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/widgets/widgets.dart';
-import 'package:go_router/go_router.dart';
+import '../../widgets/widgets.dart';
 
-const transactionExample = [
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-  {
-    'incomeType': 'Salary',
-    'cardType': 'Debet card',
-    'transactionType': '+',
-    'transactionTime': '17:09',
-    'amount': 20,
-    'icon': Icons.arrow_forward_ios_rounded,
-    'transactionIcon': Icons.shopping_cart,
-  },
-];
+import '../../store/store.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -49,34 +11,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List transactionList = [];
-
-  @override
-  void initState() {
-    transactionList.addAll(transactionExample);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  // void _iconPressHandler(BuildContext context) {
-  //   final transactionData = {
-  //     'incomeType': 'Salary',
-  //     'cardType': 'Debet card',
-  //     'transactionType': '+',
-  //     'transactionTime': '17:09',
-  //     'amount': 20,
-  //     'icon': Icons.arrow_forward_ios_rounded,
-  //     'transactionIcon': Icons.shopping_cart,
-  //   };
-
-  //   setState(() {
-  //     transactionList.add(transactionData);
-  //   });
-  // }
+  final MobXStore _store = MobXStore();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +33,15 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      GoRouter.of(context).push('/add-transaction');
+                      // GoRouter.of(context).push('/add-transaction');
+                      _store.addNewTransaction(
+                        'Salary',
+                        'Debet Card',
+                        '+',
+                        '17:20',
+                        Icons.shopping_cart,
+                        20,
+                      );
                     },
                     icon: const Icon(
                       Icons.add_circle_outline,
@@ -108,33 +51,8 @@ class _MainScreenState extends State<MainScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              Text(transactionList.length.toString()),
-              ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: transactionList.length,
-                padding: const EdgeInsets.all(8),
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onTap: () => GoRouter.of(context)
-                          .push('/transaction-details/$index'),
-                      child: TransactionItem(
-                        incomeType: transactionList[index]['incomeType'],
-                        cardType: transactionList[index]['cardType'],
-                        transactionType: transactionList[index]
-                            ['transactionType'],
-                        transactionTime: transactionList[index]
-                            ['transactionTime'],
-                        transactionIcon: transactionList[index]
-                            ['transactionIcon'],
-                        amount: transactionList[index]['amount'],
-                        icon: transactionList[index]['icon'],
-                      ),
-                    ),
-                  );
-                },
+              ObservableListView(
+                transactionList: _store.transactionList,
               ),
             ],
           ),

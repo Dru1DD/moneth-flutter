@@ -40,8 +40,11 @@ class AppRouter {
       GoRoute(
         path: '/transaction-details/:id',
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(
-            child: TransactionDetails(),
+          var extra = state.extra as Map<String, int>;
+          return MaterialPage(
+            child: TransactionDetails(
+              transactionId: extra['id']!,
+            ),
           );
         },
       ),

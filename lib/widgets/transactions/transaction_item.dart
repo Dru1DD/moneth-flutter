@@ -7,7 +7,6 @@ class TransactionItem extends StatelessWidget {
   final String transactionTime;
   final int amount;
   final IconData transactionIcon;
-  final IconData icon;
 
   const TransactionItem({
     super.key,
@@ -17,7 +16,6 @@ class TransactionItem extends StatelessWidget {
     required this.transactionTime,
     required this.transactionIcon,
     required this.amount,
-    required this.icon,
   });
 
   @override
@@ -56,7 +54,7 @@ class TransactionItem extends StatelessWidget {
                 children: [
                   Text(transactionType),
                   Text(amount.toString()),
-                  Icon(icon),
+                  const Icon(Icons.arrow_forward_ios),
                 ],
               ),
             ),
