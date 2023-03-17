@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../widgets/widgets.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../widgets/widgets.dart';
 import '../../store/store.dart';
 
 class MainScreen extends StatefulWidget {
@@ -33,15 +34,15 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      // GoRouter.of(context).push('/add-transaction');
-                      _store.addNewTransaction(
-                        'Salary',
-                        'Debet Card',
-                        '+',
-                        '17:20',
-                        Icons.shopping_cart,
-                        20,
-                      );
+                      GoRouter.of(context).push('/add-transaction');
+                      // _store.addNewTransaction(
+                      //   'Salary',
+                      //   'Debet Card',
+                      //   '+',
+                      //   '17:20',
+                      //   Icons.shopping_cart,
+                      //   20,
+                      // );
                     },
                     icon: const Icon(
                       Icons.add_circle_outline,

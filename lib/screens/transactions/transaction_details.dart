@@ -9,13 +9,16 @@ class TransactionDetails extends StatelessWidget {
   final int transactionId;
   final transactionList = transactionExample;
 
-  const TransactionDetails({super.key, required this.transactionId});
+  const TransactionDetails({
+    super.key,
+    required this.transactionId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transaction Details'),
+        title: Text(transactionList[transactionId]['catagory'].toString()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
