@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_application_1/router/router.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+
+import './store/store.dart';
+import './router/router.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
@@ -13,7 +16,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(Provider<MobXStore>(
+    create: (_) => MobXStore(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
