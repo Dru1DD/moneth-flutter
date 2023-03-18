@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/widgets.dart';
 import '../../store/store.dart';
@@ -12,10 +13,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final MobXStore _store = MobXStore();
-
   @override
   Widget build(BuildContext context) {
+    final MobXStore store = Provider.of<MobXStore>(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -34,15 +34,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                   IconButton(
                     onPressed: () {
-                      GoRouter.of(context).push('/add-transaction');
-                      // _store.addNewTransaction(
-                      //   'Salary',
-                      //   'Debet Card',
-                      //   '+',
-                      //   '17:20',
-                      //   Icons.shopping_cart,
-                      //   20,
-                      // );
+                      GoRouter.of(context).go('/add-transaction');
                     },
                     icon: const Icon(
                       Icons.add_circle_outline,
@@ -53,7 +45,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               const SizedBox(height: 20),
               ObservableListView(
-                transactionList: _store.transactionList,
+                transactionList: store.transactionList,
               ),
             ],
           ),
