@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
 
+import '../widgets.dart';
+
 class TransactionItem extends StatelessWidget {
-  final String incomeType;
   final String cardType;
+  final String catagory;
   final String transactionType;
   final String transactionTime;
   final int amount;
   final IconData transactionIcon;
+  final bool isShowArrow;
 
   const TransactionItem({
     super.key,
-    required this.incomeType,
     required this.cardType,
+    required this.catagory,
     required this.transactionType,
     required this.transactionTime,
     required this.transactionIcon,
     required this.amount,
+    required this.isShowArrow,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(16)),
-        color: Colors.deepPurpleAccent,
-      ),
+    return GlassMorphism(
+      start: 0.9,
+      end: 0.6,
+      color: Colors.purple,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Flex(
@@ -37,24 +40,30 @@ class TransactionItem extends StatelessWidget {
                 child: Icon(transactionIcon),
               ),
             ),
-            Expanded(
+            SizedBox(
               child: Flex(
                 direction: Axis.vertical,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(incomeType),
                   Text(cardType),
+                  Text(catagory),
                   Text(transactionTime),
                 ],
               ),
             ),
+            const Spacer(),
             SizedBox(
               width: 60,
               child: Row(
                 children: [
                   Text(transactionType),
-                  Text(amount.toString()),
-                  const Icon(Icons.arrow_forward_ios),
+                  Expanded(
+                    child: Text(
+                      amount.toString(),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  buildArrow(context),
                 ],
               ),
             ),
@@ -62,5 +71,9 @@ class TransactionItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget buildArrow(BuildContext context) {
+    return isShowArrow ? const Icon(Icons.arrow_forward_ios) : const Spacer();
   }
 }

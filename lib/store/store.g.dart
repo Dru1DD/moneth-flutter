@@ -25,13 +25,76 @@ mixin _$MobXStore on _MobXStore, Store {
     });
   }
 
+  late final _$balanceAtom = Atom(name: '_MobXStore.balance', context: context);
+
+  @override
+  int get balance {
+    _$balanceAtom.reportRead();
+    return super.balance;
+  }
+
+  @override
+  set balance(int value) {
+    _$balanceAtom.reportWrite(value, super.balance, () {
+      super.balance = value;
+    });
+  }
+
+  late final _$chartDataAtom =
+      Atom(name: '_MobXStore.chartData', context: context);
+
+  @override
+  ObservableList<dynamic> get chartData {
+    _$chartDataAtom.reportRead();
+    return super.chartData;
+  }
+
+  @override
+  set chartData(ObservableList<dynamic> value) {
+    _$chartDataAtom.reportWrite(value, super.chartData, () {
+      super.chartData = value;
+    });
+  }
+
+  late final _$incomeListAtom =
+      Atom(name: '_MobXStore.incomeList', context: context);
+
+  @override
+  ObservableList<dynamic> get incomeList {
+    _$incomeListAtom.reportRead();
+    return super.incomeList;
+  }
+
+  @override
+  set incomeList(ObservableList<dynamic> value) {
+    _$incomeListAtom.reportWrite(value, super.incomeList, () {
+      super.incomeList = value;
+    });
+  }
+
+  late final _$exspanseListAtom =
+      Atom(name: '_MobXStore.exspanseList', context: context);
+
+  @override
+  ObservableList<dynamic> get exspanseList {
+    _$exspanseListAtom.reportRead();
+    return super.exspanseList;
+  }
+
+  @override
+  set exspanseList(ObservableList<dynamic> value) {
+    _$exspanseListAtom.reportWrite(value, super.exspanseList, () {
+      super.exspanseList = value;
+    });
+  }
+
   late final _$_MobXStoreActionController =
       ActionController(name: '_MobXStore', context: context);
 
   @override
   void addNewTransaction(
-      String incomeType,
-      String cardType,
+      String catagory,
+      String account,
       String transactionType,
       String transactionTime,
       IconData transactionIcon,
@@ -39,7 +102,7 @@ mixin _$MobXStore on _MobXStore, Store {
     final _$actionInfo = _$_MobXStoreActionController.startAction(
         name: '_MobXStore.addNewTransaction');
     try {
-      return super.addNewTransaction(incomeType, cardType, transactionType,
+      return super.addNewTransaction(catagory, account, transactionType,
           transactionTime, transactionIcon, amount);
     } finally {
       _$_MobXStoreActionController.endAction(_$actionInfo);
@@ -49,7 +112,11 @@ mixin _$MobXStore on _MobXStore, Store {
   @override
   String toString() {
     return '''
-transactionList: ${transactionList}
+transactionList: ${transactionList},
+balance: ${balance},
+chartData: ${chartData},
+incomeList: ${incomeList},
+exspanseList: ${exspanseList}
     ''';
   }
 }
