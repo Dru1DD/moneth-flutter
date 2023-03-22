@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../../store/store.dart';
 import './../widgets.dart';
@@ -48,8 +49,7 @@ class _TransactionFormState extends State<TransactionForm> {
         accountController.text.isEmpty;
 
     final DateTime now = DateTime.now();
-    int hour = now.hour;
-    int minute = now.minute;
+    final String currentTime = DateFormat("hh.mm").format(now);
 
     if (isOneOfControllerIsEmpty) {
       showDialog(
@@ -76,7 +76,7 @@ class _TransactionFormState extends State<TransactionForm> {
       catagoryController.text.toString(),
       accountController.text.toString(),
       activeTabIndex == 0 ? '+' : '-',
-      '$hour:$minute',
+      currentTime,
       Icons.shopping_cart,
       int.parse(amountController.text),
     );

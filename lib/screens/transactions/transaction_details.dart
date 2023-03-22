@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/widgets.dart';
-
-import '../../example/transaction_list.dart';
+import '../../store/store.dart';
 
 class TransactionDetails extends StatelessWidget {
   final int transactionId;
-  final transactionList = transactionExample;
 
   const TransactionDetails({
     super.key,
@@ -16,9 +15,12 @@ class TransactionDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MobXStore store = Provider.of<MobXStore>(context);
+    final transactionList = store.transactionList;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(transactionList[transactionId]['catagory'].toString()),
+        title: Text(transactionList[transactionId]['catagory']),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
@@ -50,13 +52,11 @@ class TransactionDetails extends StatelessWidget {
             ),
             Field(
               firstLabel: 'Transaction time',
-              secondLabel:
-                  transactionList[transactionId]['transactionTime'].toString(),
+              secondLabel: transactionList[transactionId]['transactionTime'],
             ),
             Field(
               firstLabel: 'Currency',
-              secondLabel:
-                  transactionList[transactionId]['currency'].toString(),
+              secondLabel: transactionList[transactionId]['currency'],
             ),
           ],
         ),

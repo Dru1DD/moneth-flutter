@@ -35,8 +35,8 @@ class ObservableListView extends StatelessWidget {
                       );
                     },
                     child: TransactionItem(
-                      incomeType: transactionList[index]['incomeType'],
                       cardType: transactionList[index]['cardType'],
+                      catagory: transactionList[index]['catagory'],
                       transactionType: transactionList[index]
                           ['transactionType'],
                       transactionTime: transactionList[index]
@@ -44,6 +44,7 @@ class ObservableListView extends StatelessWidget {
                       transactionIcon: transactionList[index]
                           ['transactionIcon'],
                       amount: transactionList[index]['amount'],
+                      isShowArrow: true,
                     ),
                   ),
                 );
