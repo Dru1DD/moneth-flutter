@@ -51,7 +51,15 @@ class _SignInScreenState extends State<SignInScreen> {
         GoRouter.of(context).push('/');
       }
     } catch (e) {
-      print('Error with message: $e.message');
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text('Error with message: $e.message'),
+          );
+        },
+      );
     }
   }
 
