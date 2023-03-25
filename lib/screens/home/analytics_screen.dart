@@ -20,6 +20,7 @@ class AnalyticsScreen extends StatelessWidget {
           bottom: 10,
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             const Text(
               'Balance',
@@ -46,7 +47,9 @@ class AnalyticsScreen extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            const SegmentedTabController(),
+            const Expanded(
+              child: SegmentedTabController(),
+            ),
           ],
         ),
       ),

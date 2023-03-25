@@ -62,21 +62,23 @@ class _SegmentedTabControllerState extends State<SegmentedTabController> {
   }
 
   Widget buildListView(BuildContext context, List transactionList) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: transactionList.length,
-      padding: const EdgeInsets.all(8),
-      itemBuilder: (BuildContext context, int index) => Padding(
+    return SingleChildScrollView(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: transactionList.length,
         padding: const EdgeInsets.all(8),
-        child: TransactionItem(
-          cardType: transactionList[index]['cardType'],
-          catagory: transactionList[index]['catagory'],
-          transactionTime: transactionList[index]['transactionTime'],
-          transactionIcon: transactionList[index]['transactionIcon'],
-          transactionType: transactionList[index]['transactionType'],
-          amount: transactionList[index]['amount'],
-          isShowArrow: false,
+        itemBuilder: (BuildContext context, int index) => Padding(
+          padding: const EdgeInsets.all(8),
+          child: TransactionItem(
+            cardType: transactionList[index]['cardType'],
+            catagory: transactionList[index]['catagory'],
+            transactionTime: transactionList[index]['transactionTime'],
+            transactionIcon: transactionList[index]['transactionIcon'],
+            transactionType: transactionList[index]['transactionType'],
+            amount: transactionList[index]['amount'],
+            isShowArrow: false,
+          ),
         ),
       ),
     );
