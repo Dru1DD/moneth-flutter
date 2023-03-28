@@ -41,8 +41,7 @@ class ObservableListView extends StatelessWidget {
                           ['transactionType'],
                       transactionTime: transactionList[index]
                           ['transactionTime'],
-                      transactionIcon: transactionList[index]
-                          ['transactionIcon'],
+                      transactionIcon: Icons.shopping_cart,
                       amount: transactionList[index]['amount'],
                       isShowArrow: true,
                     ),

@@ -9,6 +9,37 @@ part of 'store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MobXStore on _MobXStore, Store {
+  late final _$isLoggedInAtom =
+      Atom(name: '_MobXStore.isLoggedIn', context: context);
+
+  @override
+  bool get isLoggedIn {
+    _$isLoggedInAtom.reportRead();
+    return super.isLoggedIn;
+  }
+
+  @override
+  set isLoggedIn(bool value) {
+    _$isLoggedInAtom.reportWrite(value, super.isLoggedIn, () {
+      super.isLoggedIn = value;
+    });
+  }
+
+  late final _$userIdAtom = Atom(name: '_MobXStore.userId', context: context);
+
+  @override
+  String get userId {
+    _$userIdAtom.reportRead();
+    return super.userId;
+  }
+
+  @override
+  set userId(String value) {
+    _$userIdAtom.reportWrite(value, super.userId, () {
+      super.userId = value;
+    });
+  }
+
   late final _$transactionListAtom =
       Atom(name: '_MobXStore.transactionList', context: context);
 
@@ -88,22 +119,56 @@ mixin _$MobXStore on _MobXStore, Store {
     });
   }
 
-  late final _$_MobXStoreActionController =
-      ActionController(name: '_MobXStore', context: context);
+  late final _$fetchTransactionAsyncAction =
+      AsyncAction('_MobXStore.fetchTransaction', context: context);
 
   @override
-  void addNewTransaction(
+  Future<void> fetchTransaction(dynamic uid) {
+    return _$fetchTransactionAsyncAction.run(() => super.fetchTransaction(uid));
+  }
+
+  late final _$addNewTransactionAsyncAction =
+      AsyncAction('_MobXStore.addNewTransaction', context: context);
+
+  @override
+  Future<void> addNewTransaction(
       String catagory,
       String account,
       String transactionType,
       String transactionTime,
-      IconData transactionIcon,
-      int amount) {
-    final _$actionInfo = _$_MobXStoreActionController.startAction(
-        name: '_MobXStore.addNewTransaction');
+      String transactionIcon,
+      int amount,
+      dynamic user) {
+    return _$addNewTransactionAsyncAction.run(() => super.addNewTransaction(
+        catagory,
+        account,
+        transactionType,
+        transactionTime,
+        transactionIcon,
+        amount,
+        user));
+  }
+
+  late final _$_MobXStoreActionController =
+      ActionController(name: '_MobXStore', context: context);
+
+  @override
+  void setUserUid(String uid) {
+    final _$actionInfo =
+        _$_MobXStoreActionController.startAction(name: '_MobXStore.setUserUid');
     try {
-      return super.addNewTransaction(catagory, account, transactionType,
-          transactionTime, transactionIcon, amount);
+      return super.setUserUid(uid);
+    } finally {
+      _$_MobXStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLoggedIn(bool value) {
+    final _$actionInfo = _$_MobXStoreActionController.startAction(
+        name: '_MobXStore.setLoggedIn');
+    try {
+      return super.setLoggedIn(value);
     } finally {
       _$_MobXStoreActionController.endAction(_$actionInfo);
     }
@@ -112,6 +177,8 @@ mixin _$MobXStore on _MobXStore, Store {
   @override
   String toString() {
     return '''
+isLoggedIn: ${isLoggedIn},
+userId: ${userId},
 transactionList: ${transactionList},
 balance: ${balance},
 chartData: ${chartData},

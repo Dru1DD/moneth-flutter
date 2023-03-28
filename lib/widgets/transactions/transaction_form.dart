@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../store/store.dart';
 import './../widgets.dart';
@@ -23,6 +24,8 @@ class TransactionForm extends StatefulWidget {
 }
 
 class _TransactionFormState extends State<TransactionForm> {
+  late FirebaseAuth auth = FirebaseAuth.instance;
+  late User user = auth.currentUser!;
   late TextEditingController amountController;
   late TextEditingController catagoryController;
   late TextEditingController accountController;
@@ -77,10 +80,10 @@ class _TransactionFormState extends State<TransactionForm> {
       accountController.text.toString(),
       activeTabIndex == 0 ? '+' : '-',
       currentTime,
-      Icons.shopping_cart,
+      'shopping_cart',
       int.parse(amountController.text),
+      user,
     );
-    // TODO saving data to Firebase
     GoRouter.of(context).go('/');
   }
 

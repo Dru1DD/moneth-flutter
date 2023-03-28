@@ -1,9 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 import '../widgets/widgets.dart';
+import '../store/store.dart';
 
 class SignUpScreen extends StatefulWidget {
   final Function() onClickedSignIn;
@@ -39,7 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  Future<void> signUpHandler(context) async {
+  Future<void> signUpHandler(context, store) async {
     try {
       final User? user = (await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
@@ -48,6 +50,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           .user;
 
       if (user != null) {
+        store.setLoggedIn(true);
+        store.setUserUid(user.uid);
         GoRouter.of(context).push('/');
       }
     } catch (e) {
@@ -65,6 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final MobXStore store = Provider.of<MobXStore>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -117,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 18),
               BuildButton(
                 buttonText: 'Sign Up',
-                pressedCallback: () => signUpHandler(context),
+                pressedCallback: () => signUpHandler(context, store),
               ),
               const SizedBox(height: 18),
               RichText(
