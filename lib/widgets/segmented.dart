@@ -60,7 +60,14 @@ class _SegmentedTabControllerState extends State<SegmentedTabController> {
       ],
     );
   }
+//TODO: Something like this
+//   final Map<String, IconData> iconMap = {
+//   'shopping_cart': Icons.shopping_cart,
+//   'star': Icons.star,
+//   // add more icon mappings here
+// };
 
+// Icon(iconMap['shopping_cart'])
   Widget buildListView(BuildContext context, List transactionList) {
     return SingleChildScrollView(
       child: ListView.builder(
@@ -74,7 +81,7 @@ class _SegmentedTabControllerState extends State<SegmentedTabController> {
             cardType: transactionList[index]['cardType'],
             catagory: transactionList[index]['catagory'],
             transactionTime: transactionList[index]['transactionTime'],
-            transactionIcon: transactionList[index]['transactionIcon'],
+            transactionIcon: Icons.shopping_cart,
             transactionType: transactionList[index]['transactionType'],
             amount: transactionList[index]['amount'],
             isShowArrow: false,

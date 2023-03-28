@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter_application_1/screens/screens.dart';
+import 'package:provider/provider.dart';
+
+import '/screens/screens.dart';
+import '/store/store.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    MobXStore store = Provider.of<MobXStore>(context);
+    store.fetchTransaction(store.userId);
     return Scaffold(
       body: tabsView[activeIndex],
       bottomNavigationBar: CurvedNavigationBar(
