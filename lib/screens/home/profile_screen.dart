@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../widgets/widgets.dart';
 
@@ -7,8 +8,11 @@ class ProfileScreen extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
 
   ProfileScreen({super.key});
-  Future logOutHandler() async {
+
+  Future logOutHandler(context) async {
     await FirebaseAuth.instance.signOut();
+
+    GoRouter.of(context).push('/');
   }
 
   @override
@@ -17,7 +21,6 @@ class ProfileScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Center(
         child: ListView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.only(top: 50.0),
           children: [
             const SizedBox(height: 18),
@@ -68,12 +71,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 500,
-            ),
+            const SizedBox(height: 18),
             BuildButton(
               buttonText: 'Log out',
-              pressedCallback: logOutHandler,
+              pressedCallback: () => logOutHandler(context),
             ),
           ],
         ),
