@@ -71,8 +71,8 @@ class _TransactionFormState extends State<TransactionForm> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Alert Title"),
-            content: const Text("This is the alert message."),
+            title: const Text("Error"),
+            content: const Text("You need to fill all of the fields."),
             actions: [
               BuildButton(
                 buttonText: "OK",
