@@ -33,9 +33,10 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-android {
-  defaultConfig {
+defaultConfig {
     minSdkVersion 21
-    targetSdkVersion 30
-  }
+    compileSdkVersion 33
+    targetSdkVersion flutter.targetSdkVersion
+    versionCode flutterVersionCode.toInteger()
+    versionName flutterVersionName
 }
