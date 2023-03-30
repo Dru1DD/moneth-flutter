@@ -32,3 +32,10 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+android {
+  defaultConfig {
+    minSdkVersion 21
+    targetSdkVersion 30
+  }
+}
