@@ -32,11 +32,3 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-defaultConfig {
-    minSdkVersion 21
-    compileSdkVersion 33
-    targetSdkVersion flutter.targetSdkVersion
-    versionCode flutterVersionCode.toInteger()
-    versionName flutterVersionName
-}
