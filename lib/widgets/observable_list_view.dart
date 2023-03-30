@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 
+import '../constants/constants.dart';
 import './widgets.dart';
 
 class ObservableListView extends StatelessWidget {
@@ -41,7 +42,8 @@ class ObservableListView extends StatelessWidget {
                           ['transactionType'],
                       transactionTime: transactionList[index]
                           ['transactionTime'],
-                      transactionIcon: Icons.shopping_cart,
+                      transactionIcon:
+                          iconMap[transactionList[index]['transactionIcon']]!,
                       amount: transactionList[index]['amount'],
                       isShowArrow: true,
                     ),

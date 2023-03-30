@@ -49,11 +49,6 @@ abstract class _MobXStore with Store {
       if (doc.id == uid) {
         final data = doc.data();
 
-        // print(data);
-        // print(data.runtimeType);
-        // print(data['transactions']);
-        // print(data['transactions'].runtimeType);
-
         transactionList.clear();
         incomeList.clear();
         exspanseList.clear();
